@@ -3,11 +3,12 @@ require_relative 'page'
 require_relative 'cover'
 
 class Book
-    def initialize(post)
+    def initialize(post, path)
         @id = post.post_id
         @post = post
         @cover = Cover.new(post.title, post.author, post.perma_link)
         @content = Page.new(post.title, post.content)
+        @path = path
     end
 
     def render
@@ -25,6 +26,6 @@ class Book
             content_page.add_content StringIO.new(@content.render)
         end
         
-        book.generate_epub("#{@id}.epub")
+        book.generate_epub(@path)
     end
 end

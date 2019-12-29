@@ -1,7 +1,7 @@
 require_relative 'book'
 class HiddenBook < Book
-    def initialize(post)
-        super(post)
+    def initialize(post, path)
+        super(post, path)
     end
 
     def render
@@ -18,7 +18,7 @@ class HiddenBook < Book
             content_page.add_content StringIO.new(@content.render)
         end
         
-        book.generate_epub("#{@id}.epub")
+        book.generate_epub(@path)
     end
 
     def get_title

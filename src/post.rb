@@ -16,9 +16,10 @@ class Post
     end
 
     def generate_book
-        book = Book.new(self)
+        path = "output/#{post_id}.epub"
+        book = Book.new(self, path)
         if @nsfw
-            book = HiddenBook.new(self)
+            book = HiddenBook.new(self, path)
         end
 
         return book
@@ -44,8 +45,10 @@ class Post
     end
 
     def create_redd_session
+        username = @config['username']
+        user_agent = "script:epub-maker-for-reddit:v.0.1 \(by \/u\/#{username}\)"
         session = Redd.it(
-            user_agent: 'script:epub-maker-for-reddit:v.0.1 (by /u/KleenexDevourer)',
+            user_agent: user_agent,
             client_id:  @config['client_id'],
             secret:     @config['secret'],
             username:   @config['username'],
