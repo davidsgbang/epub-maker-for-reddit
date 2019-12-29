@@ -1,8 +1,10 @@
 require 'redd'
 require 'yaml'
+require_relative 'book'
+require_relative 'hidden-book'
 
 class Post
-    attr_reader :title, :nsfw, :post_id, :perma_link, :author, :content
+    attr_reader :title, :post_id, :perma_link, :author, :content, :created_at
     def initialize(post_id, title = nil, nsfw = nil)
         @config = YAML::load_file("./config/config.yaml") unless defined? CONFIG
 
@@ -11,6 +13,15 @@ class Post
         @nsfw = nsfw
 
         populate_fields!
+    end
+
+    def generate_book
+        book = Book.new(self)
+        if @nsfw
+            book = HiddenBook.new(self)
+        end
+
+        return book
     end
 
     private
@@ -28,7 +39,8 @@ class Post
         @perma_link = submission.permalink
         @title = submission.title unless !@title.nil?
         @author = submission.author.name
-        @nsfw = submission.over_18? unless defined? !@nsfw.nil?
+        @nsfw = submission.over_18? unless !@nsfw.nil?
+        @created_at = Time.at(submission.created_utc)
     end
 
     def create_redd_session

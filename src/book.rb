@@ -5,6 +5,7 @@ require_relative 'cover'
 class Book
     def initialize(post)
         @id = post.post_id
+        @post = post
         @cover = Cover.new(post.title, post.author, post.perma_link)
         @content = Page.new(post.title, post.content)
     end

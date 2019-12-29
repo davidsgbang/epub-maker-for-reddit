@@ -7,7 +7,7 @@ id = gets.strip
 
 begin
     post = Post.new(id)
-    book = Book.new(post)
+    book = post.generate_book
 
     book.render
 rescue ArgumentError => argumentException
