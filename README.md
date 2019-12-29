@@ -7,6 +7,10 @@ Prerequisite:
 
 To use:
 
+Populate _config.yaml.template_ with your own data
+
+Change the populated _config.yaml.template_ to _config.yaml_
+
 `bundle install`
 
 `rake create` 
