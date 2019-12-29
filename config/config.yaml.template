@@ -1,0 +1,4 @@
+client_id: [client_id]
+secret: [application_secret]
+username: [reddit_username]
+password: [reddit_password]
