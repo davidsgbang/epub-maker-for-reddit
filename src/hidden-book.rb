@@ -23,6 +23,6 @@ class HiddenBook < Book
 
     def get_title
         posted_date = @post.created_at.strftime("%Y/%m/%d")
-        return "by #{@post.author} - #{posted_date}"
+        return "Reddit Post by #{@post.author} - #{posted_date}"
     end
 end

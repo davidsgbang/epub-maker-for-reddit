@@ -4,7 +4,7 @@ class Cover
     attr_reader :title, :author, :url
     def initialize(title, author, url)
         @title = title
-        @author = author
+        @author = "\/u\/#{author}"
         @url = url
         @template = File.read('./resources/cover.erb')
     end
